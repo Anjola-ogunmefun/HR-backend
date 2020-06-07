@@ -2,13 +2,13 @@ const express = require('express');
 const app = express();
 
 const route = require('./route/index');
-const port = 3400;
+const port = 3000;
 
-const nodemailer = require('nodemailer');
-const mongoose = require('./db');
-const entryRoute = require('./entry/add-coy');
-const infoRoute = require('./entry/info');
-const userRoute = require('./entry/user')
+// const nodemailer = require('nodemailer');
+// const mongoose = require('./db');
+// const entryRoute = require('./entry/add-coy');
+// const infoRoute = require('./entry/info');
+// const userRoute = require('./entry/user')
 
 
 app.use('/', route)
