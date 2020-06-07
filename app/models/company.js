@@ -37,6 +37,7 @@ const CompanySchema = new Schema({
     },
     country: {
       type: String,
+      default: "Nigeria"
     },
     phoneNumber: {
         type: String,
@@ -53,8 +54,8 @@ const CompanySchema = new Schema({
       minlength: 1,
       maxlength: 1000
     },
-    department: {
-        type: String,
+    departments: {
+        type: [String],
         minlength: 1,
         maxlength: 50
     },
