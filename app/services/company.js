@@ -9,8 +9,8 @@ class companyServices {
         return Company.findOne({ email });
     };
 
-    updateCompany(param){
-        return companyServices.create(param)
+    updateCompany(email, params){
+        return Company.findOneAndUpdate({email}, {$set: params}, {new: true})
     }
 };
 

@@ -14,5 +14,8 @@ router.post('/login', (req, res) => {
     return new AuthController().login(req, res);
 })
 
+router.post('/update', (req, res) => {
+    return new companyController().updateCompany(req, res);
+});
 
 module.exports = router;
