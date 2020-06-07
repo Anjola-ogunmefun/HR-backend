@@ -1,13 +1,18 @@
 const router = require('express').Router();
-const MainController = require('../controllers/index');
+const bodyParser = require('body-parser');
 
-router.get('/test', (req, res) => {
-    return new MainController().testFunction(req, res)
+const companyController = require('../controllers/company');
+const AuthController = require('../controllers/auth');
+
+// company
+router.use(bodyParser.json());
+router.post('/add-company', (req, res) => {
+    return new companyController().inviteCompany(req, res);
 });
 
-router.get('/try', (req, res) => {
-    return new MainController().returnMyName(req, res)
-});
+router.post('/login', (req, res) => {
+    return new AuthController().login(req, res);
+})
 
 
 module.exports = router;

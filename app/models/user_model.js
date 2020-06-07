@@ -1,4 +1,4 @@
-const config = require('config');
+const config = require('../config/config');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
@@ -24,12 +24,9 @@ const UserSchema = new mongoose.Schema({
 });
 
 
-
-
-
 // //custom method to generate authToken 
 UserSchema.methods.generateAuthToken = function() { 
-  const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.get('myprivatekey')); //get the private key from the config file -> environment variable
+  const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.keys.myprivatekey); //get the private key from the config file -> environment variable
   return token;
 }
 const User = mongoose.model('user', UserSchema);
@@ -44,14 +41,6 @@ function validateUser(user) {
 
   return Joi.validate(user, schema);
 }
-
-
-//   const time = Date.now()
-//     const timeNow = time - CompanySchema.createdAt
-
-//     if( ` ${Math.floor(timeNow / 1000)} >= 180 ` ){
-//       CompanySchema.expired === true
-//     }
 
 exports.User = User; 
 exports.validate = validateUser;
