@@ -20,6 +20,22 @@ const CompanySchema = new Schema({
       required: true,
       unique: true
      },
+     token: {
+      type: String,
+       required: true,
+       unique: true
+      },
+      inviteTokenExpired:{
+       type: Boolean,
+       default: false,
+       required: true
+      },
+      status:{
+       type: String,
+       enum: ['pending', 'invited', 'expired', 'active'],
+       default: 'pending',
+       required: true
+      },
      expired:{
       type: Boolean,
       default: false,
@@ -72,7 +88,7 @@ const CompanySchema = new Schema({
 
 );
 
-const CompanyModel = mongoose.model('new company', CompanySchema);
+const CompanyModel = mongoose.model('newcompany', CompanySchema);
 
 exports.Company = CompanyModel;
 

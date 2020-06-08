@@ -42,6 +42,71 @@ class companyController {
             });
         };
         
+    
+
+    validateToken(req, res){
+        const { email, token } = req.query
+        if(!email || !token){
+            return res.status(400).send({
+                error: true,
+                code: 400,
+                message: "token and email must be passed to the query parameter"
+                })
+             }
+           return this.checkIfTokenExpired(email, token, res)
+        }
+    
+       
+        async checkIfTokenExpired(email, token, res){
+            const companyRecord = await new companyServices().findOne(email);
+            if(!companyRecord){
+                return res.send({
+                    error: true,
+                    code: 404,
+                    message: "Company not registered"
+                })
+            }
+            if(companyRecord.token !== token){
+                return res.send({
+                    error: true,
+                    code: 401,
+                    message: "Token does not match the required token"
+                })
+            }
+
+            console.log('companyRecord', companyRecord)
+            const creationTime = companyRecord.createdAt;
+            console.log('creationTime', creationTime);
+            console.log('creation time', creationTime.getTime())
+            console.log('new time', new Date().getTime())
+            
+            let difference = new Date().getTime() - creationTime.getTime() 
+    
+            let daysDifference = Math.floor(difference/1000/60/60/24);
+            difference = difference - daysDifference*1000*60*60*24
+            if(daysDifference > 2){
+                companyRecord.status = 'expired';
+                companyRecord.inviteTokenExpired = true;
+                companyRecord.save()
+                return res.status(401).send({
+                    error: true,
+                    code: 401,
+                    message: "Invite token has expired"
+                })
+                
+            } else {
+                companyRecord.status = 'active';
+                companyRecord.inviteTokenExpired = false;
+                companyRecord.save()
+                return res.status(200).send({
+                    error:false,
+                    code: 200,
+                    message: "Invite accepted successfully"
+                })
+            }
+    };
+       
+    
 
         async updateCompany(req, res){
             const { email, sector, staffSize, country, phoneNumber, address, description, state, departments } = req.body;

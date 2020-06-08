@@ -10,7 +10,11 @@ class AuthController {
         try {
             let user =  await new AuthServices().findOne(req.body.email)
             console.log('login', user)
-            if (user) return res.status(400).send("User already registered.");
+            if (user) return res.status(400).send({
+                error: true,
+                code: 400,
+                message: "User already registered"
+            })
        
            user = new User({
            name: req.body.name,
