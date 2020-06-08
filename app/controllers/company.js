@@ -59,6 +59,7 @@ class companyController {
        
         async checkIfTokenExpired(email, token, res){
             const companyRecord = await new companyServices().findOne(email);
+            console.log(companyRecord)
             if(!companyRecord){
                 return res.send({
                     error: true,
@@ -66,6 +67,7 @@ class companyController {
                     message: "Company not registered"
                 })
             }
+            console.log(companyRecord.token)
             if(companyRecord.token !== token){
                 return res.send({
                     error: true,
@@ -101,12 +103,12 @@ class companyController {
                 return res.status(200).send({
                     error:false,
                     code: 200,
-                    message: "Invite accepted successfully"
+                    message: "Invite token is still valid"
                 })
             }
     };
-       
-    
+
+
 
         async updateCompany(req, res){
             const { email, sector, staffSize, country, phoneNumber, address, description, state, departments } = req.body;

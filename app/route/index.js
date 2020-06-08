@@ -12,6 +12,14 @@ router.post('/add-company', (req, res) => {
 
 router.post('/login', (req, res) => {
     return new AuthController().login(req, res);
+});
+
+router.get('/validate', (req, res) => {
+    return new companyController().validateToken(req, res)
+});
+
+router.post('/resendEmail', (req, res) => {
+    return new AuthController().resendEmail(req, res)
 })
 
 router.post('/update', (req, res) => {

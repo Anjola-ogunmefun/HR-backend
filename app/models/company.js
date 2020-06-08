@@ -15,11 +15,6 @@ const CompanySchema = new Schema({
         maxlength: 255,
         unique: true
     },
-    token: {
-     type: String,
-      required: true,
-      unique: true
-     },
      token: {
       type: String,
        required: true,
@@ -36,11 +31,6 @@ const CompanySchema = new Schema({
        default: 'pending',
        required: true
       },
-     expired:{
-      type: Boolean,
-      default: false,
-      required: true
-     },
      sector: {
       type: String,
       minlength: 1,
@@ -79,6 +69,10 @@ const CompanySchema = new Schema({
         type: String,
         minlength: 1,
         maxlength: 50
+    },
+    resends:{
+      type: Number,
+      default: 0
     },
     //give different access rights if admin or not 
     isAdmin: Boolean
