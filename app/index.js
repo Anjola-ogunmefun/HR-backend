@@ -1,6 +1,8 @@
 // require modules
 const express = require('express');
 const app = express();
+
+const mongoose = require('../db');
 // import packages
 const config = require('./config/config');
 const router = require('./route/index');

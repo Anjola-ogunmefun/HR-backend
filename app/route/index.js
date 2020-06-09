@@ -1,14 +1,13 @@
-const onboardingController = require('../controller/onboardingController');
+const router = require('express').Router();
 const bodyParser = require('body-parser');
-const mongoose = require('../db');
-// const express = require('express');
 
-const route = require('express').Router();
+const companyController = require('../controllers/company');
+const AuthController = require('../controllers/auth');
 
-route.use(bodyParser.json());
-route.use(mongoose.json());
-route.get('/:companyId', (req, res) => {
-    return new onboardingController().updateCompanyRecordById(req, res);
+// company
+router.use(bodyParser.json());
+router.post('/add-company', (req, res) => {
+    return new companyController().inviteCompany(req, res);
 });
 route.get('/:companyEmail', (req, res) => {
     return new onboardingController().updateCompanyRecordByEmail(req, res);
@@ -28,10 +27,11 @@ module.exports = route;
 
 
 
-// route.post('/login', (req, res) => {
-//     return new AuthController().login(req, res);
-// })
+router.post('/login', (req, res) => {
+    return new AuthController().login(req, res);
+})
 
+<<<<<<< HEAD
 // route.post('/update', (req, res) => {
 //     return new companyController().updateCompany(req, res)
 // })
@@ -45,5 +45,10 @@ module.exports = route;
 // onBoardingRouter.get('/:companyId', (req, res) => {
 //     return new MainController().updateCompanyRecordById(req, res)
 // });
+=======
+router.post('/update', (req, res) => {
+    return new companyController().updateCompany(req, res);
+});
+>>>>>>> 50f12bfc16b1b91a4008def44e70dcddf9e3cb2d
 
-// module.exports = onboardingRouter;
+module.exports = router;
