@@ -41,6 +41,24 @@ updateCompanyRecordById = async (req, res) =>{
     })
 }
 
+  //update  company record by company email
+updateCompanyRecordByEmail= async (req, res) =>{
+    const company = await UpdateModel.findById(req.params.companyEmail);
+
+    if(!company)
+        return res.status(404).send({
+            message:'The company record does not exist!'
+        });
+        
+    const updatedRecord = await UpdateModel.findByEmailAndUpdate(req.params.companyEmail,
+        {set:req.body}, {new: true});
+
+    return res.status(200).send({
+        message:'company record was updated successfully',
+        data: updatedRecord
+    })
+}
+
 };
 
 module.exports = OnboardingController;

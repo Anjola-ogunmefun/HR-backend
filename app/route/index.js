@@ -10,6 +10,23 @@ route.use(mongoose.json());
 route.get('/:companyId', (req, res) => {
     return new onboardingController().updateCompanyRecordById(req, res);
 });
+route.get('/:companyEmail', (req, res) => {
+    return new onboardingController().updateCompanyRecordByEmail(req, res);
+});
+
+
+
+
+
+
+module.exports = route;
+
+
+
+
+
+
+
 
 // route.post('/login', (req, res) => {
 //     return new AuthController().login(req, res);
@@ -19,7 +36,7 @@ route.get('/:companyId', (req, res) => {
 //     return new companyController().updateCompany(req, res)
 // })
 
-module.exports = route;
+
 
 
 // const onboardingRouter = require('express').Router();
