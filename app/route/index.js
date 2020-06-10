@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const companyController = require('../controllers/company');
 const AuthController = require('../controllers/auth');
 
-// company
+// company (route)
 router.use(bodyParser.json());
 router.post('/add-company', (req, res) => {
     return new companyController().inviteCompany(req, res);
