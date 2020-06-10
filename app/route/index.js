@@ -9,7 +9,7 @@ router.use(bodyParser.json());
 router.post('/add-company', (req, res) => {
     return new companyController().inviteCompany(req, res);
 });
-route.get('/:companyEmail', (req, res) => {
+router.get('/:companyEmail', (req, res) => {
     return new onboardingController().updateCompanyRecordByEmail(req, res);
 });
 
