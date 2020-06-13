@@ -15,16 +15,22 @@ const CompanySchema = new Schema({
         maxlength: 255,
         unique: true
     },
-    token: {
-     type: String,
-      required: true,
-      unique: true
-     },
-     expired:{
-      type: Boolean,
-      default: false,
-      required: true
-     },
+     token: {
+      type: String,
+       required: true,
+       unique: true
+      },
+      inviteTokenExpired:{
+       type: Boolean,
+       default: false,
+       required: true
+      },
+      status:{
+       type: String,
+       enum: ['pending', 'invited', 'expired', 'active'],
+       default: 'pending',
+       required: true
+      },
      sector: {
       type: String,
       minlength: 1,
@@ -64,6 +70,10 @@ const CompanySchema = new Schema({
         minlength: 1,
         maxlength: 50
     },
+    resends:{
+      type: Number,
+      default: 0
+    },
     //give different access rights if admin or not 
     isAdmin: Boolean
     },{
@@ -72,7 +82,7 @@ const CompanySchema = new Schema({
 
 );
 
-const CompanyModel = mongoose.model('new company', CompanySchema);
+const CompanyModel = mongoose.model('newcompany', CompanySchema);
 
 exports.Company = CompanyModel;
 

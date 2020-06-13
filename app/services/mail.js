@@ -1,7 +1,5 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-// const userRoute = require('./user');
-// const token = require("./user")
 
 
 function sendEmail(email, name, token){
