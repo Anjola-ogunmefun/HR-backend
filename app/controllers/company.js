@@ -61,7 +61,7 @@ class companyController {
             const companyRecord = await new companyServices().findOne(email);
             console.log(companyRecord)
             if(!companyRecord){
-                return res.send({
+                return res.status(404).send({
                     error: true,
                     code: 404,
                     message: "Company not registered"
@@ -106,7 +106,7 @@ class companyController {
                     message: "Invite token is still valid"
                 })
             }
-    };
+        };
 
 
 
@@ -151,7 +151,7 @@ class companyController {
                 // check if company exist
                 const company = await new companyServices().findOne(email);
                 if(!company){
-                    return res.send({
+                    return res.status(401).send({
                         error: true,
                         code: 401,
                         message: "Company needs to be registered first"
@@ -162,7 +162,7 @@ class companyController {
 
                 // update the record
                 const updatedRecord = await new companyServices().updateCompany(email, params);
-                return res.send({
+                return res.status(202).send({
                     error: false,
                     code: 202,
                     message: "Company record updated successfully",
@@ -176,7 +176,34 @@ class companyController {
                     message: "Could not save record!"
                 });
             }
+      
         }
+
+    async findStatus(req, res){
+        const {email} = req.body
+        
+        const companyRecord = await new companyServices().findOne(email)
+        const companyStatus = companyRecord.status
+
+        if(!companyRecord){
+            return res.status(400).send({
+                error: true,
+                code: 400,
+                message: "Company not found!"
+            })
+        }
+
+        if(companyRecord){
+            console.log(companyRecord)
+            return res.status(200).send({
+                error: false,
+                code: 200,
+                companyStatus
+            })
+        }
+    }
+
+
 };
 
 

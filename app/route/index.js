@@ -23,7 +23,11 @@ router.post('/resendEmail', (req, res) => {
 })
 
 router.post('/update', (req, res) => {
-    return new companyController().updateCompany(req, res);
-});
+    return new companyController().updateCompany(req, res)
+})
+
+router.get('/status', (req, res) => {
+    return new companyController().findStatus(req, res)
+})
 
 module.exports = router;
