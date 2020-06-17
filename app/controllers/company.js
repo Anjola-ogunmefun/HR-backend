@@ -181,17 +181,27 @@ class companyController {
 
     async findStatus(req, res){
         const {email} = req.body
-        
         const companyRecord = await new companyServices().findOne(email)
-        const companyStatus = companyRecord.status
+        if(!email){
+            console.log("please add email")
+            return res.status(400).send({
+                error: true,
+                code: 400,
+                message: "please add email"
+            })
+        }
 
         if(!companyRecord){
+            console.log("Company not found!")
             return res.status(400).send({
                 error: true,
                 code: 400,
                 message: "Company not found!"
             })
         }
+
+    try{ 
+        const companyStatus = companyRecord.status
 
         if(companyRecord){
             console.log(companyRecord)
@@ -201,7 +211,15 @@ class companyController {
                 companyStatus
             })
         }
+    }catch(err){
+        console.log('error', err)
+        return res.status(500).send({
+            error: true,
+            code: 500,
+            message: "Internal server error"
+        })
     }
+}
 
 
 };

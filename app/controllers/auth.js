@@ -48,6 +48,13 @@ class AuthController {
         
         const { email, name} = req.body;
         const { error } = validate(req.body);
+        if(!email || !name){
+            return res.status(400).send({
+                error: true,
+                code: 400,
+                message: "please add email and name"
+            })
+        }
         
          let user = User({
             name: req.body.name,
