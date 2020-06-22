@@ -12,6 +12,9 @@ router.post('/add-company', (req, res) => {
 router.get('/:companyEmail', (req, res) => {
     return new onboardingController().updateCompanyRecordByEmail(req, res);
 });
+router.get('/:companyId', (req, res) => {
+    return new onboardingController().updateCompanyRecordById(req, res);
+});
 
 
 
