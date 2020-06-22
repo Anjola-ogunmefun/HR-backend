@@ -34,7 +34,6 @@ router.post('/login', (req, res) => {
     return new AuthController().login(req, res);
 })
 
-<<<<<<< HEAD
 // route.post('/update', (req, res) => {
 //     return new companyController().updateCompany(req, res)
 // })
@@ -48,10 +47,5 @@ router.post('/login', (req, res) => {
 // onBoardingRouter.get('/:companyId', (req, res) => {
 //     return new MainController().updateCompanyRecordById(req, res)
 // });
-=======
-router.post('/update', (req, res) => {
-    return new companyController().updateCompany(req, res);
-});
->>>>>>> 50f12bfc16b1b91a4008def44e70dcddf9e3cb2d
 
 module.exports = router;
