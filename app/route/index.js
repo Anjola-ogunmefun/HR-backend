@@ -6,12 +6,18 @@ const AuthController = require('../controllers/auth');
 
 // company (route)
 router.use(bodyParser.json());
+router.post('/login', (req, res) => {
+    return new AuthController().login(req, res);
+});
+
 router.post('/add-company', (req, res) => {
     return new companyController().inviteCompany(req, res);
 });
+
 router.get('/:companyEmail', (req, res) => {
     return new onboardingController().updateCompanyRecordByEmail(req, res);
 });
+
 router.get('/:companyId', (req, res) => {
     return new onboardingController().updateCompanyRecordById(req, res);
 });
@@ -21,7 +27,7 @@ router.get('/:companyId', (req, res) => {
 
 
 
-module.exports = route;
+module.exports = router;
 
 
 
@@ -30,9 +36,6 @@ module.exports = route;
 
 
 
-router.post('/login', (req, res) => {
-    return new AuthController().login(req, res);
-})
 
 // route.post('/update', (req, res) => {
 //     return new companyController().updateCompany(req, res)
@@ -48,4 +51,4 @@ router.post('/login', (req, res) => {
 //     return new MainController().updateCompanyRecordById(req, res)
 // });
 
-module.exports = router;
+
