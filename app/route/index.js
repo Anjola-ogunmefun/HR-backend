@@ -14,9 +14,23 @@ router.post('/add-company', (req, res) => {
     return new companyController().inviteCompany(req, res);
 });
 
+
 router.get('/:companyEmail', (req, res) => {
     return new onboardingController().updateCompanyRecordByEmail(req, res);
 });
+
+router.post('/login', (req, res) => {
+    return new AuthController().login(req, res);
+});
+
+router.get('/validate', (req, res) => {
+    return new companyController().validateToken(req, res)
+});
+
+router.post('/resendEmail', (req, res) => {
+    return new AuthController().resendEmail(req, res)
+})
+
 
 router.get('/:companyId', (req, res) => {
     return new onboardingController().updateCompanyRecordById(req, res);
