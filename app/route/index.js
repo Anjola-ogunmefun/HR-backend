@@ -30,4 +30,12 @@ router.get('/:companyId', (req, res) => {
     return new onboardingController().updateCompanyRecordById(req, res);
 });
 
+router.post('/update', (req, res) => {
+    return new companyController().updateCompany(req, res)
+})
+
+router.get('/status', (req, res) => {
+    return new companyController().findStatus(req, res)
+})
+
 module.exports = router;
