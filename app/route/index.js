@@ -30,8 +30,13 @@ router.get('/status', (req, res) => {
     return new companyController().findStatus(req, res)
 })
 
+router.get('/graph', (req, res) => {
+    return new companyController().graph(req, res)
+})
+
 router.get('/test-auto-deploy', (req, res) => {
     return res.send("Auto deploy work");
 })
+
 
 module.exports = router;

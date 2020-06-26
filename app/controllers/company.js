@@ -112,11 +112,11 @@ class companyController {
 
         async updateCompany(req, res){
             const { email, sector, staffSize, country, phoneNumber, address, description, state, departments } = req.body;
-            if(!email || !sector || !phoneNumber || !address || !departments){
+            if(!email || !sector || !phoneNumber || !address || !departments || staffSize){
                 return res.send({
                     error: true,
                     code: 400,
-                    message: "email, sector, phoneNumber, address, departments are required"
+                    message: "email, sector, phoneNumber, address, departments, staffsize are required"
                 })
             }
 
@@ -124,11 +124,8 @@ class companyController {
                 sector,
                 phoneNumber,
                 address,
-                departments
-            };
-
-            if(staffSize !== undefined){
-                params.staffSize = staffSize;
+                departments, 
+                staffSize
             };
 
             if(country !== undefined){
@@ -219,8 +216,41 @@ class companyController {
             message: "Internal server error"
         })
     }
-}
+    };
 
+
+    async graph(req, res){
+        
+        const allRecords = await new companyServices().getCompany()
+        let name
+        let staffSize
+        
+       try{
+
+        function objectArray (allRecords) {
+            return {'name': allRecords.name, 'staffSize': allRecords.staffSize}
+        }
+
+        const result = allRecords.map(objectArray)
+        console.log(result)
+        
+        return res.status(200).send({
+            error: false,
+            code: 200,
+            message:"data for graph has been fetched",
+            result
+        })
+       }
+        catch(error){
+        console.log('error', error)
+        return res.status(500).send({
+            error: true,
+            code: 500,
+            message: "Internal server error"
+        })
+        } 
+    }
+        
 
 };
 

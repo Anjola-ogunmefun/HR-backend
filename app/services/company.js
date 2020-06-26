@@ -12,6 +12,10 @@ class companyServices {
     updateCompany(email, params){
         return Company.findOneAndUpdate({email}, {$set: params}, {new: true})
     }
+
+    getCompany(){
+        return Company.find()
+    }
 };
 
 
