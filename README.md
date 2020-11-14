@@ -1,2 +1,2 @@
 # hr-backend
- The backen code to a HR-platform -built from scratch 
+ The backen code to an HR-platform (in progress)
